@@ -18,9 +18,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from sixerrapp import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^social/', include('social.apps.django_app.urls', namespace='social')),
     url('^auth/', include('django.contrib.auth.urls', namespace='auth')),
     url('', include('sixerrapp.urls'))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
