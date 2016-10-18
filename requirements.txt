@@ -12,3 +12,4 @@ whitenoise==3.2.2
 dj-database-url==0.4.0
 psycopg2==2.6.1
 braintree==3.30.0
+django-twilio==0.8.0

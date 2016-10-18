@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sixerrapp',
     'social.apps.django_app.default',
+    'django_twilio',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -149,6 +150,9 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
 )
+
+TWILIO_ACCOUNT_SID = 'AC158a6a78c3d572b3535b317437e5a10d'
+TWILIO_AUTH_TOKEN = 'afa5fa7609fd94abf1de22a447aebda5'
 
 # Replace database setting to use postgresql on Heroku
 import dj_database_url

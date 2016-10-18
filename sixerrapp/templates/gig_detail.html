@@ -72,7 +72,7 @@
 						{% csrf_token %}
 						<div id="payment-form"></div>
 						<input name="gig_id" value="{{ gig.id }}" hidden>
-						<button type="summit" class="btn btn-success btn-block">Order Now (S{{ gig.price }})</button>
+						<button type="summit" class="btn btn-success btn-block">Order Now (${{ gig.price }})</button>
 					</form>
 						
 					<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
