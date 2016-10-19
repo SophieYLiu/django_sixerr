@@ -117,7 +117,7 @@ def create_purchase(request):
 
 			message = 'Hi David'
 			from_ = '+12015604123'
-			to = '+17144959175';
+			to = '+886955887388';
 			account = "AC158a6a78c3d572b3535b317437e5a10d"
 			token = "afa5fa7609fd94abf1de22a447aebda5"
 			client = TwilioRestClient(account, token)
