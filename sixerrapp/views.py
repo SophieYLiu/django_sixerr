@@ -115,7 +115,7 @@ def create_purchase(request):
 			})
 
 		if result.is_success:
-
+			Purchase.objects.create(gig=gig, buyer=request.user)
 			message = 'WTF ? SHIT DAVID ?'
 			from_ = '+12015604123'
 			to = '+886955887388';
