@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from .models import Gig, Profile, Purchase, Review
 from .forms import GigForm
 from twilio.rest import TwilioRestClient
@@ -115,12 +116,13 @@ def create_purchase(request):
 
 		if result.is_success:
 
-			message = 'Hi David'
+			message = 'Shit David'
 			from_ = '+12015604123'
-			to = '+886955887388';
-			account = "AC158a6a78c3d572b3535b317437e5a10d"
-			token = "afa5fa7609fd94abf1de22a447aebda5"
-			client = TwilioRestClient(account, token)
+			to = '+16265860724';
+			client = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+			# account = "AC158a6a78c3d572b3535b317437e5a10d"
+			# token = "afa5fa7609fd94abf1de22a447aebda5"
+			# client = TwilioRestClient(account, token)
 			response = client.messages.create(body=message, to=to, from_=from_)
 
 			# Purchase.objects.create(gig=gig, buyer=request.user)
