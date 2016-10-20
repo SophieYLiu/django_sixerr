@@ -116,25 +116,11 @@ def create_purchase(request):
 
 		if result.is_success:
 
-			message = 'Shit David'
+			message = 'WTF ? SHIT DAVID ?'
 			from_ = '+12015604123'
-			to = '+16265860724';
+			to = '+886955887388';
 			client = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-			# account = "AC158a6a78c3d572b3535b317437e5a10d"
-			# token = "afa5fa7609fd94abf1de22a447aebda5"
-			# client = TwilioRestClient(account, token)
 			response = client.messages.create(body=message, to=to, from_=from_)
-
-			# Purchase.objects.create(gig=gig, buyer=request.user)
-			# account = "AC158a6a78c3d572b3535b317437e5a10d"
-			# token = "afa5fa7609fd94abf1de22a447aebda5"
-			# client = TwilioRestClient(account, token)
-
-			# message = client.sms.messages.create(to="+16265860724",
-			#                                      from_="+12015604123",
-			#                                      body="Hi this is green onion")
-			
-
 			
 	return redirect('/')
 
