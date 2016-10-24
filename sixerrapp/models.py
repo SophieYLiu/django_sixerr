@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -8,6 +9,11 @@ class Profile(models.Model):
 	avatar = models.CharField(max_length=500)
 	about = models.CharField(max_length=1000)
 	slogan = models.CharField(max_length=500)
+
+	#adding phone and email
+	phone = models.CharField(default='', max_length=15)
+	email = models.EmailField(default='', max_length=254)
+
 
 	def __str__(self):
 		return self.user.username
@@ -29,9 +35,15 @@ class Gig(models.Model):
 	status = models.BooleanField(default=True)
 	user = models.ForeignKey(User)
 	create_time = models.DateTimeField(default=timezone.now)
+	#add a column
+	phone = models.CharField(default='', max_length=15)
+	# phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+	# phone_number = models.CharField(validators=[phone_regex], blank=True) # validators should be a list
 
 	def __str__(self):
 		return self.title
+
+
 
 class Purchase(models.Model):
 	gig = models.ForeignKey(Gig)

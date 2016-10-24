@@ -4,6 +4,7 @@ from django.conf import settings
 from .models import Gig, Profile, Purchase, Review
 from .forms import GigForm
 from twilio.rest import TwilioRestClient
+from sixerr.sms import send_sms
 
 
 import braintree
@@ -89,6 +90,8 @@ def profile(request, username):
 		profile = Profile.objects.get(user=request.user)
 		profile.about = request.POST['about']
 		profile.slogan = request.POST['slogan']
+		profile.email = request.POST['email']
+		profile.phone = request.POST['phone']
 		profile.save()
 	else:
 		try:
@@ -115,13 +118,22 @@ def create_purchase(request):
 			})
 
 		if result.is_success:
+
 			Purchase.objects.create(gig=gig, buyer=request.user)
-			message = 'WTF ? SHIT DAVID ?'
-			from_ = '+12015604123'
-			to = '+886955887388';
-			client = TwilioRestClient(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-			response = client.messages.create(body=message, to=to, from_=from_)
-			
+			#get seller phone # if exist
+			seller_num = gig.phone
+			if seller_num:
+				message = 'Hi ' + gig.user.username + ': Your gig "' + gig.title + '" just sold to ' + request.user.username 
+				response = send_sms(seller_num, message)
+
+
+			buyer_profile = Profile.objects.get(user=request.user)
+			#get buyer phone # if exist
+			buyer_num = buyer_profile.phone
+			if buyer_num:
+				message = 'Hello ' + request.user.username + ': You just bought the gig "' + gig.title + '" from ' + gig.user.username + ' Thank you !'
+				response = send_sms(buyer_num, message)
+
 	return redirect('/')
 
 
