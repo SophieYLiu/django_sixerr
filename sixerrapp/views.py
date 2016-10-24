@@ -164,6 +164,6 @@ def category(request, link):
 		return redirect('home')
 
 def search(request):
-	gigs = Gig.objects.filter(title__contains=request.GET['title'])
+	gigs = Gig.objects.filter(title__icontains=request.GET['title'])
 	return render(request, 'home.html', {"gigs": gigs})
 
