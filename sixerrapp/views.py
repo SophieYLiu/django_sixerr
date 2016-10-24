@@ -5,6 +5,7 @@ from .models import Gig, Profile, Purchase, Review
 from .forms import GigForm
 from twilio.rest import TwilioRestClient
 from sixerr.sms import send_sms
+from django.utils import timezone
 
 
 import braintree
@@ -123,7 +124,7 @@ def create_purchase(request):
 			#get seller phone # if exist
 			seller_num = gig.phone
 			if seller_num:
-				message = 'Hi ' + gig.user.username + ': Your gig "' + gig.title + '" just sold to ' + request.user.username 
+				message = 'Hi ' + gig.user.username + ': Your gig "' + gig.title + '" just sold to ' + request.user.username + ' at ' + str(timezone.localtime(timezone.now()))
 				response = send_sms(seller_num, message)
 
 
