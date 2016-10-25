@@ -25,7 +25,7 @@ SECRET_KEY = '(ij#nz=f8&gmzf2_xok@n-zvrddr95xdbc)3llg%u#sh4m)q)a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'sixerrapp',
     'social.apps.django_app.default',
     'django_twilio',
+    'storages',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -165,4 +166,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+########################################################
 
+# AWS_STORAGE_BUCKET_NAME = 'sixerrmedia'
+# AWS_ACCESS_KEY_ID = 'AKIAJB2VEKOXVL3D7G3Q'
+# AWS_SECRET_ACCESS_KEY = '<第一步記下的Secret Access Key>'
+
+# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+# STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+# STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+# MEDIA_ROOT = '/var/media/'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
