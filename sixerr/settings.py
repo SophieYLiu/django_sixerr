@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'sixerrapp',
     'social.apps.django_app.default',
     'django_twilio',
-    'storages',
 ]
 
 MIDDLEWARE_CLASSES = [
