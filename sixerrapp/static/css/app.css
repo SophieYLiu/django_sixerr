@@ -34,3 +34,10 @@ a:hover {
 .green {
 	color: #0bb536;
 }
+
+.element {
+  position: relative;
+  top: 85%;
+  transform: translateY(20%);
+}
+

@@ -19,6 +19,9 @@ braintree.Configuration.configure(braintree.Environment.Sandbox,
 # Create your views here.
 def home(request):
 	gigs = Gig.objects.filter(status=True)
+	# for gig in gigs:
+		# gig.price = gig.price*2
+
 	return render(request, 'home.html', {"gigs": gigs})
 
 def gig_detail(request, id):
@@ -99,6 +102,9 @@ def profile(request, username):
 			profile = Profile.objects.get(user__username=username)
 		except Profile.DoesNotExist:
 			return redirect('/')
+
+
+
 
 
 	gigs = Gig.objects.filter(user=profile.user, status=True)

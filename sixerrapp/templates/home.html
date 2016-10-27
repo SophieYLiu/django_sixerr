@@ -7,18 +7,37 @@
 			<img src="{% static 'img/banner.gif' %}" class="banner">
 		</div>
 		{% for gig in gigs %}
-			<div class="col-md-3" style="height: 280px;">
-				<div class="thumbnail">
-					<div style="height: 174px;">
-						<a href="{% url 'gig_detail' gig.id %}" ><img src="/media/{{ gig.photo }}" style="max-height: 174px; max-width: 235px; "></a>
+			<div class="col-md-3" style="height: 320px;">
+				<div class="thumbnail" id="photo-{{ forloop.counter }}">
+					<div style="height: 165px; margin-top: 8px; margin-bottom: 8px;">
+						<a href="{% url 'gig_detail' gig.id %}" ><img src="/media/{{ gig.photo }}" style="max-height: 174px; max-width: 235px;"></a>
 					</div>
-						
-					<div class="caption" style="height: 90px; max-height: 80px; max-width: 235px;">
-						<p><a href="{% url 'gig_detail' gig.id %}">{{ gig.title }}</a></p>
-						<p><span>by <a href="{% url 'profile' gig.user.username %}">{{ gig.user.username }}</a></span><b class="green pull-right">${{ gig.price }}</b></p>
+					<hr style="margin-top: 20px; margin-bottom: 0px;">
+					<div class="caption">
+						<!-- <p><a href="{% url 'gig_detail' gig.id %}">{{ gig.title | truncatechars:35 }}</a></p> -->
+						<div class="AutoSkip" style='width:200px; white-space:nowrap; width:90%; overflow:hidden; text-overflow:ellipsis;'>
+							<p><a href="{% url 'gig_detail' gig.id %}">{{ gig.title}}</a></p>
+						</div>
+						<p>
+							<span>by <a href="{% url 'profile' gig.user.username %}">{{ gig.user.username }}</a></span>
+							<b class="green pull-right" id="price-{{ forloop.counter }}">${{ gig.price }}</b>
+						</p>
 					</div>
 				</div>
 			</div>
 		{% endfor %}
 	</div>
+<!-- 	<script>
+		$( document ).ready(function() {
+		    console.log( "ready!" );
+		    // var onion_price = $('#onion_price').val();
+		    var onion_price = document.getElementById("onion_price").innerHTML;
+		    console.log(onion_price);
+		});
+	</script> -->
 {% endblock %}
+
+.img{
+   display:[inline-]block; 
+   vertical-align: [middle] 
+}
