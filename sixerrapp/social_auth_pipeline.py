@@ -7,6 +7,8 @@ def save_avatar(backend, user, response, *args, **kwargs):
         profile = Profile(user_id=user.id)
 
     if backend.name == 'facebook':
-        profile.avatar = 'http://graph.facebook.com/%s/picture?type=large' % response['id']
-
+        profile.avatar = 'http://graph.facebook.com/%s/picture?type=large' % response.get('id')
+        if not profile.email:
+        	profile.email = response.get('email')
+        	# or use => profile.email = response['email']
     profile.save()
