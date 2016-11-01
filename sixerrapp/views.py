@@ -6,10 +6,10 @@ from .forms import GigForm
 from twilio.rest import TwilioRestClient
 from sixerr.sms import send_sms
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 import braintree
-
 braintree.Configuration.configure(braintree.Environment.Sandbox,
 									merchant_id="7f36yb4sb7v7x3vk",
 									public_key="j9fxrnkcc7xtfb86",
@@ -18,7 +18,15 @@ braintree.Configuration.configure(braintree.Environment.Sandbox,
 
 # Create your views here.
 def home(request):
-	gigs = Gig.objects.filter(status=True)
+	gig_list = Gig.objects.filter(status=True)
+	page = request.GET.get('page', 1)
+	paginator = Paginator(gig_list, 4)
+	try:
+		gigs = paginator.page(page)
+	except PageNotAnInteger:
+		gigs = paginator.page(1)
+	except EmptyPage:
+		gigs = paginator.page(paginator.num_pages)
 	# for gig in gigs:
 		# gig.price = gig.price*2
 
