@@ -20,13 +20,18 @@ braintree.Configuration.configure(braintree.Environment.Sandbox,
 def home(request):
 	gig_list = Gig.objects.filter(status=True)
 	page = request.GET.get('page', 1)
-	paginator = Paginator(gig_list, 8)
+	paginator = Paginator(gig_list, 4)
 	try:
 		gigs = paginator.page(page)
 	except PageNotAnInteger:
 		gigs = paginator.page(1)
 	except EmptyPage:
 		gigs = paginator.page(paginator.num_pages)
+	return render(request, 'home.html', {"gigs": gigs})
+
+
+def home_all(request):
+	gigs = Gig.objects.filter(status=True)
 	return render(request, 'home.html', {"gigs": gigs})
 
 def gig_detail(request, id):
@@ -174,8 +179,17 @@ def category(request, link):
 		"programming-tech": "PT"
 	}
 	try:
-		gigs = Gig.objects.filter(category=categories[link])
+		gig_list = Gig.objects.filter(category=categories[link])
+		page = request.GET.get('page', 1)
+		paginator = Paginator(gig_list, 4)
+		try:
+			gigs = paginator.page(page)
+		except PageNotAnInteger:
+			gigs = paginator.page(1)
+		except EmptyPage:
+			gigs = paginator.page(paginator.num_pages)
 		return render(request, 'home.html', {"gigs": gigs})
+
 	except KeyError:
 		return redirect('home')
 
