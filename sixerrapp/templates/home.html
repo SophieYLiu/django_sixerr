@@ -7,7 +7,7 @@
 			<img src="{% static 'img/banner.gif' %}" class="banner">
 		</div>
 		{% for gig in gigs %}
-			<div class="col-md-3" style="height: 320px;">
+			<div class="col-md-3" style="height: 300px;">
 				<div class="thumbnail" id="photo-{{ forloop.counter }}">
 					<div style="height: 165px; margin-top: 8px; margin-bottom: 8px;">
 						<a href="{% url 'gig_detail' gig.id %}" ><img src="/media/{{ gig.photo }}" style="max-height: 174px; max-width: 235px;""></a>
@@ -23,41 +23,32 @@
 				</div>
 			</div>
 		{% endfor %}
-
+		</div>
+		
+		<!-- pagination list from here -->
 		{% if gigs.has_other_pages %}
-			<ul class="pagination">
-			    {% if gigs.has_previous %}
-			    	<li><a href="?page={{ gigs.previous_page_number }}">&laquo;</a></li>
-			    {% else %}
-			    	<li class="disabled"><span>&laquo;</span></li>
-			    {% endif %}
-			    {% for i in gigs.paginator.page_range %}
-			    	{% if gigs.number == i %}
-			      		<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-			    	{% else %}
-			        	<li><a href="?page={{ i }}">{{ i }}</a></li>
-			    	{% endif %}
-			    {% endfor %}
-			    {% if gigs.has_next %}
-			    	<li><a href="?page={{ gigs.next_page_number }}">&raquo;</a></li>
-			    {% else %}
-			    	<li class="disabled"><span>&raquo;</span></li>
-			    {% endif %}
-			</ul>
+		<!-- <br clear="all"> -->
+			<div class="text-center" >
+				<ul class="pagination" style="margin-top:2px;">
+				    {% if gigs.has_previous %}
+				    	<li><a href="?page={{ gigs.previous_page_number }}">&laquo;</a></li>
+				    {% else %}
+				    	<li class="disabled"><span>&laquo;</span></li>
+				    {% endif %}
+				    {% for i in gigs.paginator.page_range %}
+				    	{% if gigs.number == i %}
+				      		<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+				    	{% else %}
+				        	<li><a href="?page={{ i }}">{{ i }}</a></li>
+				    	{% endif %}
+				    {% endfor %}
+				    {% if gigs.has_next %}
+				    	<li><a href="?page={{ gigs.next_page_number }}">&raquo;</a></li>
+				    {% else %}
+				    	<li class="disabled"><span>&raquo;</span></li>
+				    {% endif %}
+				</ul>
+			</div>
 		{% endif %}
-
-	</div>
-<!-- 	<script>
-		$( document ).ready(function() {
-		    console.log( "ready!" );
-		    // var onion_price = $('#onion_price').val();
-		    var onion_price = document.getElementById("onion_price").innerHTML;
-		    console.log(onion_price);
-		});
-	</script> -->
+	
 {% endblock %}
-
-<!-- .img{
-   display:[inline-]block; 
-   vertical-align: [middle] 
-} -->

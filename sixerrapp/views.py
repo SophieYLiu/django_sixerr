@@ -20,16 +20,13 @@ braintree.Configuration.configure(braintree.Environment.Sandbox,
 def home(request):
 	gig_list = Gig.objects.filter(status=True)
 	page = request.GET.get('page', 1)
-	paginator = Paginator(gig_list, 4)
+	paginator = Paginator(gig_list, 8)
 	try:
 		gigs = paginator.page(page)
 	except PageNotAnInteger:
 		gigs = paginator.page(1)
 	except EmptyPage:
 		gigs = paginator.page(paginator.num_pages)
-	# for gig in gigs:
-		# gig.price = gig.price*2
-
 	return render(request, 'home.html', {"gigs": gigs})
 
 def gig_detail(request, id):
@@ -111,7 +108,15 @@ def profile(request, username):
 		except Profile.DoesNotExist:
 			return redirect('/')
 
-	gigs = Gig.objects.filter(user=profile.user, status=True)
+	gig_list = Gig.objects.filter(user=profile.user, status=True)
+	page = request.GET.get('page', 1)
+	paginator = Paginator(gig_list, 4)
+	try:
+		gigs = paginator.page(page)
+	except PageNotAnInteger:
+		gigs = paginator.page(1)
+	except EmptyPage:
+		gigs = paginator.page(paginator.num_pages)
 	return render(request, 'profile.html', {"profile": profile, "gigs": gigs})
 
 @login_required(login_url="/")
