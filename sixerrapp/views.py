@@ -30,9 +30,9 @@ def home(request):
 	return render(request, 'home.html', {"gigs": gigs})
 
 
-def home_all(request):
-	gigs = Gig.objects.filter(status=True)
-	return render(request, 'home.html', {"gigs": gigs})
+# def home_all(request):
+# 	gigs = Gig.objects.filter(status=True)
+# 	return render(request, 'home.html', {"gigs": gigs})
 
 def gig_detail(request, id):
 	if request.method == 'POST' and \

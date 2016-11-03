@@ -23,7 +23,7 @@
 				</div>
 			</div>
 		{% endfor %}
-		</div>
+	</div>
 		
 		<!-- pagination list from here -->
 		{% if gigs.has_other_pages %}
@@ -47,17 +47,7 @@
 				    {% else %}
 				    	<li class="disabled"><span>&raquo;</span></li>
 				    {% endif %}
-				    <li><a href="{% url 'home_all' %}" style="color:green"><b>show all gigs</b></a></li>
 				</ul>
-			</div>
-		
-		{% else %}
-			<div class="text-center">
-				<ul class="pagination" style="margin-top:2px;">
-					<li><a href="/" style="color:green"><b>show less</b></a></li>
-				</ul>
-			</div>
-			
+			</div>	
 		{% endif %}
-	
 {% endblock %}

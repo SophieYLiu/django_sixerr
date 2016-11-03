@@ -1,9 +1,17 @@
-.container {
-	width: 1100px;
-}
+/* .代表class, #代表ID */
+/* .代表class, #代表ID */
+/* .代表class, #代表ID */
+/* .代表class, #代表ID */
+/* .代表class, #代表ID */
+/* .代表class, #代表ID */
 
-body {
-	padding-top: 80px;
+/*.container {
+	width: 1100px;
+}*/
+
+html, body {
+	padding-top: 30px;
+	height: 100%;
 }
 
 a {
@@ -22,21 +30,57 @@ a:hover {
 	background-color: #f7f7f7;
 }
 
-#body .banner {
+/*#body .banner {
+	width: 100%;
+	margin-bottom: 20px;
+}*/
+.banner {
 	width: 100%;
 	margin-bottom: 20px;
 }
 
 #footer {
 	padding: 20px 0;
+	font-color
 }
 
 .green {
 	color: #0bb536;
 }
 
-.element {
-  position: relative;
-  top: 85%;
-  transform: translateY(20%);
+
+/* From reference */
+#id_wrapper {
+    /* 設定高度最小為100%, 如果內容區塊很多, 可以長大 */
+    min-height: 97%;
+    /* 位置設為relative, 作為footer區塊位置的參考 */
+    position: relative;
 }
+
+#id_header {
+    /* 設定header的高度 */
+    height: 40px;
+    box-sizing: border-box;
+}
+
+#id_content {
+    /* 留出header及footer區塊的空間 */
+    /*padding-top: 40px;*/
+    padding-bottom: 40px;
+}
+
+#id_footer {
+    /* 設定footer的高度 */
+    height: 40px;
+    box-sizing: border-box;
+    /* 設定footer絕對位置在底部 */
+    position: absolute;
+    bottom: 0;
+    /* 展開footer寬度 */
+    width: 100%;
+}
+
+.taco_test{
+	color: red;
+}
+
