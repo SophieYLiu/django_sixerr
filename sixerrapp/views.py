@@ -178,20 +178,26 @@ def category(request, link):
 		"music-audio": "MA",
 		"programming-tech": "PT"
 	}
-	try:
-		gig_list = Gig.objects.filter(category=categories[link])
-		page = request.GET.get('page', 1)
-		paginator = Paginator(gig_list, 4)
-		try:
-			gigs = paginator.page(page)
-		except PageNotAnInteger:
-			gigs = paginator.page(1)
-		except EmptyPage:
-			gigs = paginator.page(paginator.num_pages)
+
+	if link == "all":
+		gigs = Gig.objects.filter(status=True)
 		return render(request, 'home.html', {"gigs": gigs})
 
-	except KeyError:
-		return redirect('home')
+	else:	
+		try:
+			gig_list = Gig.objects.filter(category=categories[link])
+			page = request.GET.get('page', 1)
+			paginator = Paginator(gig_list, 4)
+			try:
+				gigs = paginator.page(page)
+			except PageNotAnInteger:
+				gigs = paginator.page(1)
+			except EmptyPage:
+				gigs = paginator.page(paginator.num_pages)
+			return render(request, 'home.html', {"gigs": gigs})
+
+		except KeyError:
+			return redirect('home')
 
 def search(request):
 	gigs = Gig.objects.filter(title__icontains=request.GET['title'])
